@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Budget</title>
+    <!-- vanilla css using -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- tailwind css using -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header>
+        <div class="w-3/4 mx-auto mt-20">
+            <h1 class="text-2xl md:text-5xl text-center text-neutral-800 font-bold">Monthly Budget</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-7 w-4/5 mt-20 mx-auto mb-10">
+            <div class="h-auto">
+                <img class="currency-image mx-auto h-full" src="images/currency.jpg" alt="">
+            </div>
+            <div class="xl:w-11/12 bg-red-100 h-auto">
+                <!------- income part --------->
+                <h1 class="text-xl text-center text-neutral-800 font-semibold mt-10">Income</h1>
+                <div class="mx-auto w-3/4 mt-5">
+                    <span class="font-semibold xl:text-lg">Income :</span> 
+                    <input class="border rounded-md w-3/5 xl:w-3/4 p-1 md:p-2 ml-3 lg:ml-2 bg-slate-300 outline-0 font-semibold" type="text"  id="income-input" autocomplete="off">
+
+                    <!-- error message for string -->
+                    <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="incometext-error-msg">Please input number</p>
+
+                    <!-- error message for negative value -->
+                    <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="incomevalue-error-msg">Negative value not acceptable</p>
+                    
+                </div>
+                <h1 class="text-xl text-center text-neutral-800 font-semibold mt-10">Expenses</h1>
+
+                <!-------- expense part -------->
+                <div class="mx-auto w-3/4 mt-5">
+                    <span class="font-semibold text-sm xl:text-lg">Food :</span> 
+                    <input class="border rounded-md w-3/5 xl:w-3/4 p-1 md:p-2 ml-6 bg-slate-300 outline-0 font-semibold" type="text" id="foodcost-input" autocomplete="off">
+                        <!-- error message for string -->
+                        <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="foodtext-error-msg">Please input number</p>
+
+                        <!-- error message for negative value -->
+                        <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="foodvalue-error-msg">Negative value not acceptable</p>
+                </div>
+                <div class="mx-auto w-3/4 mt-5">
+                    <span class="font-semibold text-sm xl:text-lg">Rent :</span>
+                     <input class="border rounded-md w-3/5 xl:w-3/4 p-1 md:p-2 ml-7 bg-slate-300 outline-0 font-semibold" type="text" id="rentcost-input" autocomplete="off">
+                      <!-- error message for string -->
+                      <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="renttext-error-msg">Please input number</p>
+
+                      <!-- error message for negative value -->
+                      <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="rentvalue-error-msg">Negative value not acceptable</p>
+                </div>
+                <div class="mx-auto w-3/4 mt-5">
+                    <span class="font-semibold text-sm xl:text-lg">Clothes :</span>
+                     <input class="border rounded-md w-3/5 xl:w-3/4 p-1 md:p-2 ml-2.5 md:ml-1.5 bg-slate-300 outline-0 font-semibold" type="text"  id="clothecost-input" autocomplete="off">
+                        <!-- error message for string -->
+                        <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="clothetext-error-msg">Please input number</p>
+
+                        <!-- error message for negative value -->
+                        <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="clothevalue-error-msg">Negative value not acceptable</p>
+                </div>
+                <!--------- calculation part ----------->
+                <div class="w-1/4 mx-auto mt-5">
+                    <button class="rounded-lg bg-orange-400 text-white font-semibold p-2" id="calculation">Calculate</button>
+                </div>
+
+                <!------------ total expense and balance part ------------->
+                <div>
+                    <h1 class="xl:text-xl lg:text-center text-neutral-800 font-semibold mt-10 ml-5 lg:ml-0">Total Expenses : <span id="total-expenses">00</span></h1>
+                    <h1 class="xl:text-xl lg:text-center text-neutral-800 font-semibold mt-3 ml-5 lg:ml-0">Balance : <span id="rest-balance">00</span></h1>
+                </div>
+
+                <!------------ saving part ------------------->
+                    <div class="flex justify-around items-center w-2/4 mx-auto mt-10">
+                        <div class="w-2/4"><span class="font-semibold">Save</span></div>
+                        <div>
+                            <input type="text" class="w-16 py-1 px-2 rounded-lg outline-0 ml-2 lg:mr-5 bg-slate-300 font-semibold" id="savemoney-input" autocomplete="off">
+                        </div>
+                        <div class="w-2/4"><span class="font-semibold ml-2 mr-2 sm:mr-0 sm:ml-3">%</span></div>
+                        <div><button class="bg-orange-400  rounded-lg px-3 py-1 font-semibold" id="savemoney-btn">Save</button></div>
+                    </div>
+                    <!-- error message for string -->
+                <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="savingtext-error-msg">Please input number</p>
+
+                <!-- error message for negative value -->
+                <p class="text-xs text-center mt-2 bg-slate-100 rounded-md w-2/3 md:w-1/2 mx-auto p-2 hidden" id="savingvalue-error-msg">Negative value not acceptable</p>
+                    <div>
+                        <h1 class="xl:text-xl lg:text-center text-neutral-800 font-semibold mt-10 ml-5 lg:ml-0">Saving Amount : <span id="save-amount">00</span></h1>
+                        <h1 class="xl:text-xl lg:text-center text-neutral-800 font-semibold mt-3 mb-10 ml-5 lg:ml-0">Remaining Balance : <span id="remaining-amount">00</span></h1>
+                    </div>
+           </div>
+        </section>
+    </main>
+
+    <!-- javascript using -->
+    <script src="js/app.js"></script>
+</body>
+</html>
